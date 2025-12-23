@@ -7,6 +7,8 @@
 [![React](https://img.shields.io/badge/React-18.2-blue.svg)](https://reactjs.org/)
 [![Fastify](https://img.shields.io/badge/Fastify-4.24-green.svg)](https://www.fastify.io/)
 
+> ⚠️ **Note**: This is a **proof of concept (POC)** project demonstrating AI-powered API generation. It's not production-ready and should be used for learning and experimentation purposes.
+
 **API Generator** is a fullstack application that automatically generates REST API endpoints from functional descriptions. Simply describe what you want your API to do, and the AI generates the TypeScript code, creates a secure endpoint, and provides complete documentation.
 
 ## ✨ Features
@@ -197,10 +199,21 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 - [React](https://reactjs.org/) for the UI library
 - [vm2](https://github.com/patriksimek/vm2) for secure code execution
 
+## ⚠️ Project Status
+
+This is a **proof of concept (POC)** project. While functional, it's intended for:
+- Learning and experimentation
+- Demonstrating AI-powered code generation
+- Exploring the possibilities of natural language to API conversion
+
+**Not recommended for production use** without significant security hardening, testing, and optimization.
+
 ## 🐛 Known Issues
 
 - Complex nested object validation may need refinement
 - AI-generated code may require manual adjustments for edge cases
+- Sandbox security should be enhanced for production use
+- Error handling could be more robust
 
 ## 📧 Support
 

@@ -1,7 +1,7 @@
 {
   "name": "api-generator-fullstack",
   "version": "1.0.0",
-  "description": "Application fullstack de génération automatique d'APIs REST avec IA",
+  "description": "Proof of Concept: Application fullstack de génération automatique d'APIs REST avec IA (Groq)",
   "private": true,
   "workspaces": [
     "backend",
@@ -27,7 +27,9 @@
     "fastify",
     "code-generation",
     "automation",
-    "openapi"
+    "openapi",
+    "proof-of-concept",
+    "poc"
   ],
   "author": "",
   "license": "MIT",
