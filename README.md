@@ -40,8 +40,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/backend-api-generator-with-ia.git
-cd backend-api-generator-with-ia
+git clone https://github.com/anas-en-naqadi/Ai-Api-Generator.git
+cd Ai-Api-Generator
 
 # Install all dependencies
 npm run install:all
@@ -114,7 +114,7 @@ curl -X POST http://localhost:3000/api/calculateTotalPrice \
 ## 🏗️ Architecture
 
 ```
-backend-api-generator-with-ia/
+Ai-Api-Generator/
 ├── backend/              # Fastify API server
 │   ├── src/
 │   │   ├── routes/       # API routes
@@ -217,7 +217,7 @@ This is a **proof of concept (POC)** project. While functional, it's intended fo
 
 ## 📧 Support
 
-- Open an [issue](https://github.com/yourusername/backend-api-generator-with-ia/issues) for bug reports
+- Open an [issue](https://github.com/anas-en-naqadi/Ai-Api-Generator/issues) for bug reports
 - Check [SECURITY.md](./SECURITY.md) for security concerns
 
 ## 🗺️ Roadmap

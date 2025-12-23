@@ -68,7 +68,7 @@ git commit -m "Initial commit: API Generator with AI"
 
 ```bash
 # Add remote (replace with your repository URL)
-git remote add origin https://github.com/yourusername/backend-api-generator-with-ia.git
+git remote add origin https://github.com/anas-en-naqadi/Ai-Api-Generator.git
 
 # Push to GitHub
 git branch -M main

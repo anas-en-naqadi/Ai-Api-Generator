@@ -14,8 +14,8 @@ Thank you for your interest in contributing to API Generator! This document prov
 1. **Fork the repository**
 2. **Clone your fork**
    ```bash
-   git clone https://github.com/yourusername/backend-api-generator-with-ia.git
-   cd backend-api-generator-with-ia
+   git clone https://github.com/anas-en-naqadi/Ai-Api-Generator.git
+   cd Ai-Api-Generator
    ```
 3. **Install dependencies**
    ```bash

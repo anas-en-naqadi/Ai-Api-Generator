@@ -35,10 +35,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/anas-en-naqadi/backend-api-generator-with-ia.git"
+    "url": "https://github.com/anas-en-naqadi/Ai-Api-Generator.git"
   },
   "bugs": {
-    "url": "https://github.com/anas-en-naqadi/backend-api-generator-with-ia/issues"
+    "url": "https://github.com/anas-en-naqadi/Ai-Api-Generator/issues"
   },
-  "homepage": "https://github.com/anas-en-naqadi/backend-api-generator-with-ia#readme"
+  "homepage": "https://github.com/anas-en-naqadi/Ai-Api-Generator#readme"
 }

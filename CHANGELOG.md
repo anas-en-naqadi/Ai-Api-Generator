@@ -38,6 +38,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/yourusername/backend-api-generator-with-ia/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/yourusername/backend-api-generator-with-ia/releases/tag/v1.0.0
+[Unreleased]: https://github.com/anas-en-naqadi/Ai-Api-Generator/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/anas-en-naqadi/Ai-Api-Generator/releases/tag/v1.0.0
 
