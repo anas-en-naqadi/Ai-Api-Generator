@@ -1,0 +1,42 @@
+{
+  "name": "api-generator-fullstack",
+  "version": "1.0.0",
+  "description": "Application fullstack de génération automatique d'APIs REST avec IA",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "build": "npm run build --workspace=backend && npm run build --workspace=frontend",
+    "install:all": "npm install && npm install --workspace=backend && npm install --workspace=frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "api-generator",
+    "rest-api",
+    "ai",
+    "groq",
+    "typescript",
+    "react",
+    "fastify",
+    "code-generation",
+    "automation",
+    "openapi"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anas-en-naqadi/backend-api-generator-with-ia.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anas-en-naqadi/backend-api-generator-with-ia/issues"
+  },
+  "homepage": "https://github.com/anas-en-naqadi/backend-api-generator-with-ia#readme"
+}

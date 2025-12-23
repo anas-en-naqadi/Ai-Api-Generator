@@ -1,0 +1,330 @@
+.api-tester {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.tester-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.example-div {
+  width: '100%';
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.endpoint-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.method-badge {
+  background: var(--color-success);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.endpoint-url {
+  background: var(--color-bg-tertiary);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.function-documentation-section {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.documentation-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.documentation-content {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  line-height: 1.6;
+}
+
+.documentation-content h1,
+.documentation-content h2,
+.documentation-content h3 {
+  margin: var(--spacing-sm) 0;
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.documentation-content h1 {
+  font-size: 1.25rem;
+}
+
+.documentation-content h2 {
+  font-size: 1.125rem;
+}
+
+.documentation-content h3 {
+  font-size: 1rem;
+}
+
+.documentation-content code {
+  background: var(--color-bg-tertiary);
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  font-family: 'Courier New', monospace;
+}
+
+.documentation-content strong {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.documentation-content em {
+  font-style: italic;
+}
+
+.documentation-content ul,
+.documentation-content ol {
+  margin: var(--spacing-sm) 0;
+  padding-left: var(--spacing-lg);
+}
+
+.documentation-content li {
+  margin: var(--spacing-xs) 0;
+}
+
+.documentation-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--spacing-md) 0;
+}
+
+.documentation-content table th,
+.documentation-content table td {
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.documentation-content table th {
+  background: var(--color-bg-tertiary);
+  font-weight: 700;
+}
+
+.documentation-content pre {
+  background: var(--color-bg-tertiary);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  margin: var(--spacing-md) 0;
+}
+
+.documentation-content pre code {
+  background: transparent;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.tester-section {
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tester-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.section-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text);
+}
+
+.inputs-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.type-badge {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-light);
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: var(--spacing-sm);
+  text-transform: uppercase;
+}
+
+.checkbox-label-large {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  font-size: 1rem;
+  cursor: pointer;
+  user-select: none;
+  padding: var(--spacing-md);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-base);
+}
+
+.checkbox-label-large:hover {
+  background: var(--color-bg-tertiary);
+  border-color: var(--color-border-hover);
+}
+
+.checkbox-label-large input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.form-textarea-code {
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.tester-actions {
+  margin: var(--spacing-xl) 0;
+  text-align: center;
+}
+
+.result-container {
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  border: 1px solid;
+}
+
+.result-success {
+  background: #f0fdf4;
+  border-color: var(--color-success);
+}
+
+.result-error {
+  background: #fef2f2;
+  border-color: var(--color-error);
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.result-status {
+  font-weight: 700;
+  color: var(--color-success);
+  font-size: 0.9375rem;
+}
+
+.result-json {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.loading-badge {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.example-container {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.example-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+}
+
+.example-json {
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .tester-header {
+    flex-direction: column;
+  }
+
+  .example-loading-state {
+    color: var(--color-text-light);
+  }
+
+  .example-loading-state .spinner {
+    width: 32px;
+    height: 32px;
+    border-width: 3px;
+    margin-bottom: var(--spacing-md);
+  }
+
+.example-loading-state p {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+}
