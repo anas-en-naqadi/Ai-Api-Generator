@@ -40,16 +40,31 @@ function App() {
   const [docsFunction, setDocsFunction] = useState<GeneratedFunction | null>(null);
   const { toasts, showSuccess, showError, removeToast } = useToast();
 
-  const handleFunctionCreated = (newFunction: GeneratedFunction) => {
-    setFunctions((prev) => {
-      // Éviter les doublons
-      const exists = prev.find((f) => f.name === newFunction.name);
-      if (exists) {
-        return prev.map((f) => (f.name === newFunction.name ? newFunction : f));
+  const handleFunctionCreated = async (newFunction: GeneratedFunction) => {
+    // Ajouter à la liste locale
+    setFunctions((prev) => [newFunction, ...prev]);
+
+    try {
+      // 🔄 Recharger depuis le backend pour avoir les vraies données
+      const response = await fetch('/api/functions');
+      if (response.ok) {
+        const data = await response.json();
+        const refreshedFunction = data.functions.find(
+          (f: GeneratedFunction) => f.name === newFunction.name
+        );
+
+        if (refreshedFunction) {
+          setSelectedFunction(refreshedFunction); // ✅ Vraies données avec bon token
+          setFunctions(data.functions); // Sync complète
+        } else {
+          setSelectedFunction(newFunction); // Fallback
+        }
       }
-      return [newFunction, ...prev];
-    });
-    setSelectedFunction(newFunction);
+    } catch (err) {
+      console.error('Erreur lors du rechargement:', err);
+      setSelectedFunction(newFunction); // Fallback
+    }
+
     setActiveTab('test');
   };
 
@@ -100,13 +115,13 @@ function App() {
           console.warn('Erreur HTTP lors du chargement des fonctions:', response.status);
           return;
         }
-        
+
         const text = await response.text();
         if (!text || text.trim() === '') {
           console.warn('Réponse vide du serveur');
           return;
         }
-        
+
         const data = JSON.parse(text);
         if (data.functions) {
           setFunctions(data.functions);
@@ -191,12 +206,12 @@ function App() {
             <ApiTester function={selectedFunction} />
           )}
           {activeTab === 'docs' && docsFunction && (
-            <DocumentationPage 
-              function={docsFunction} 
+            <DocumentationPage
+              function={docsFunction}
               onBack={() => {
                 setActiveTab('list');
                 setDocsFunction(null);
-              }} 
+              }}
             />
           )}
         </div>

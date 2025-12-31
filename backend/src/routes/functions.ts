@@ -97,7 +97,7 @@ export async function createFunctionRoute(
       try {
         // Valider les entrées
         const validatedData = functionDescriptionSchema.parse(request.body);
-        
+
         // Vérifier si la fonction existe déjà
         if (functionExists(validatedData.name)) {
           return reply.code(409).send({
@@ -108,7 +108,7 @@ export async function createFunctionRoute(
 
         // Générer le code via l'IA
         const generatedCode = await generateFunction(validatedData);
-        
+
         // Valider la sécurité du code généré avant sauvegarde
         const { validateCodeSafety } = await import('../services/sandbox-executor');
         const safetyCheck = validateCodeSafety(generatedCode);
@@ -129,8 +129,8 @@ export async function createFunctionRoute(
         const host = request.headers.host || `localhost:${process.env.PORT || 3000}`;
         const protocol = (request.headers['x-forwarded-proto'] as string) || 'http';
         const baseUrl = process.env.API_BASE_URL || `${protocol}://${host}`;
-        const finalDocumentation = validatedData.documentation 
-          ? validatedData.documentation 
+        const finalDocumentation = validatedData.documentation
+          ? validatedData.documentation
           : generateDocumentation(validatedData.name, validatedData, baseUrl, apiToken);
 
         // Créer l'objet fonction
@@ -201,7 +201,7 @@ export async function listFunctionsRoute(
                   properties: {
                     name: { type: 'string' },
                     route: { type: 'string' },
-                    token:{type: 'string'},
+                    token:{ type: 'string' },
                     createdAt: { type: 'string' },
                     description: {
                       type: 'object',
@@ -245,7 +245,7 @@ export async function listFunctionsRoute(
           success: true,
           functions: functions.map((func) => {
             const description = func.description;
-            
+
             return {
               name: func.name,
               route: `/api/${func.name}`,
@@ -316,7 +316,7 @@ export async function generateExampleRoute(
       try {
         const { functionName, logic, inputs } = request.body;
         const example = await generateExample(functionName, logic, inputs);
-        
+
         return reply.send({
           success: true,
           example,
@@ -387,7 +387,7 @@ export async function updateFunctionRoute(
       try {
         const { functionName } = request.params;
         const validatedData = functionDescriptionSchema.parse(request.body);
-        
+
         // Vérifier si la fonction existe
         const existingFunction = getFunction(functionName);
         if (!existingFunction) {
@@ -409,7 +409,7 @@ export async function updateFunctionRoute(
         let newCode = existingFunction.code;
         if (validatedData.name !== functionName || validatedData.logic !== existingFunction.description.logic) {
           newCode = await generateFunction(validatedData);
-          
+
           // Valider la sécurité du code généré
           const { validateCodeSafety } = await import('../services/sandbox-executor');
           const safetyCheck = validateCodeSafety(newCode);
@@ -429,7 +429,7 @@ export async function updateFunctionRoute(
 
         // Détecter si des changements ont été apportés qui nécessitent une régénération de la documentation
         const oldDesc = existingFunction.description;
-        const hasChanges = 
+        const hasChanges =
           validatedData.name !== oldDesc.name ||
           validatedData.logic !== oldDesc.logic ||
           JSON.stringify(validatedData.inputs) !== JSON.stringify(oldDesc.inputs || []) ||
@@ -521,16 +521,16 @@ export async function deleteFunctionRoute(
     async (request, reply) => {
       try {
         const { functionName } = request.params;
-        
+
         if (!functionExists(functionName)) {
           return reply.code(404).send({
             success: false,
             error: `La fonction ${functionName} n'existe pas`,
           });
         }
-        
+
         deleteFunction(functionName);
-        
+
         return reply.send({
           success: true,
           message: `Fonction ${functionName} supprimée avec succès`,

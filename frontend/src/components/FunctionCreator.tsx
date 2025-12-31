@@ -107,7 +107,7 @@ export default function FunctionCreator({ onFunctionCreated }: FunctionCreatorPr
       }
 
       setSuccess(`Fonction ${data.functionName} créée avec succès !`);
-      
+
       const newFunction: GeneratedFunction = {
         name: data.functionName,
         route: data.route,
@@ -116,6 +116,8 @@ export default function FunctionCreator({ onFunctionCreated }: FunctionCreatorPr
         description,
       };
 
+      console.log("data",newFunction)
+
       onFunctionCreated(newFunction);
 
       // Reset form
@@ -123,9 +125,7 @@ export default function FunctionCreator({ onFunctionCreated }: FunctionCreatorPr
       setInputs([{ name: '', type: 'string', required: true }]);
       setLogic('');
       setOutputType('string');
-      setDocumentation('');
     } catch (err) {
-      setDocumentation('');
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
     } finally {
       setIsLoading(false);
