@@ -1,0 +1,24 @@
+[
+  {
+    "id": "b27aaf9a-8afe-4eae-a367-8cdf72e61451",
+    "timestamp": "2026-01-06T18:31:02.400Z",
+    "functionName": "bookingTimeouts",
+    "duration": 18,
+    "status": "success",
+    "inputs": {
+      "timeout": "4000"
+    },
+    "output": "Timeout"
+  },
+  {
+    "id": "0364de6b-68fc-4710-ae5c-faf72c7f06cd",
+    "timestamp": "2026-01-06T18:30:56.548Z",
+    "functionName": "bookingTimeouts",
+    "duration": 18,
+    "status": "success",
+    "inputs": {
+      "timeout": "2000"
+    },
+    "output": "Valide"
+  }
+]

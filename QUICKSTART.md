@@ -36,6 +36,8 @@ npm run dev
 2. Remplissez le formulaire de création
 3. Cliquez sur "Générer l'API"
 4. Testez votre fonction dans l'onglet "Tester"
+5. Consultez l'onglet "Stats" pour voir l'activité et le dashboard Recharts
+6. Explorez l'onglet "Logs" pour voir l'historique détaillé des appels
 
 ## Structure
 

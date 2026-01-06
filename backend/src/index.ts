@@ -46,12 +46,20 @@ async function buildApp() {
   await updateFunctionRoute(fastify);
   await deleteFunctionRoute(fastify);
 
+  // Enregistrer les routes d'analytics
+  const { analyticsRoutes } = await import('./routes/analytics');
+  await analyticsRoutes(fastify);
+
   // Route catch-all pour les fonctions dynamiques (gère les routes créées après le démarrage)
   fastify.post('/api/:functionName', async (request, reply) => {
     const functionName = (request.params as { functionName: string }).functionName;
+    const startTime = Date.now();
+    let status: 'success' | 'error' = 'success';
+    let finalResult: unknown;
+    let errorMsg: string | undefined;
     
     // Ignorer les routes système
-    if (functionName === 'functions') {
+    if (['functions', 'generate-example', 'analytics', 'logs'].includes(functionName)) {
       return reply.code(404).send({ success: false, error: 'Route non trouvée' });
     }
 
@@ -62,6 +70,8 @@ async function buildApp() {
       });
 
       if (!tokenValidation.valid) {
+        status = 'error';
+        errorMsg = 'Unauthorized';
         return reply.code(401).send({
           success: false,
           error: 'Unauthorized',
@@ -83,6 +93,8 @@ async function buildApp() {
       // Valider la sécurité
       const safetyCheck = validateCodeSafety(storedFunction.code);
       if (!safetyCheck.safe) {
+        status = 'error';
+        errorMsg = `Code non sécurisé: ${safetyCheck.reason}`;
         return reply.code(400).send({
           success: false,
           error: 'Code non sécurisé',
@@ -96,14 +108,16 @@ async function buildApp() {
 
       // Exécuter la fonction
       const result = executeInSandbox(functionName, storedFunction.code, validatedInputs);
-      const finalResult = result instanceof Promise ? await result : result;
+      finalResult = result instanceof Promise ? await result : result;
 
       return {
         success: true,
         result: finalResult,
       };
     } catch (error) {
+      status = 'error';
       if (error instanceof z.ZodError) {
+        errorMsg = 'Validation error';
         return reply.code(400).send({
           success: false,
           error: 'Validation error',
@@ -111,11 +125,25 @@ async function buildApp() {
         });
       }
       
+      errorMsg = error instanceof Error ? error.message : 'Erreur inconnue';
       console.error(`Erreur dans la route /api/${functionName}:`, error);
       return reply.code(500).send({
         success: false,
-        error: error instanceof Error ? error.message : 'Erreur inconnue',
+        error: errorMsg,
       });
+    } finally {
+      // Log execution after response
+      const duration = Date.now() - startTime;
+      import('./services/analytics-service').then(m => {
+        m.logExecution({
+          functionName,
+          duration,
+          status,
+          inputs: request.body as Record<string, unknown>,
+          output: status === 'success' ? finalResult : undefined,
+          error: errorMsg,
+        }).catch(err => console.error('Erreur lors du log analytics:', err));
+      }).catch(err => console.error('Erreur import analytics service:', err));
     }
   });
 

@@ -105,7 +105,13 @@ export function registerFunctionRoute(fastify: FastifyInstance, functionName: st
   const inputSchema = createInputSchema(functionName);
 
   // Handler pour la route
+  // Handler pour la route
   const routeHandler = async (request: FastifyRequest, reply: any) => {
+    const startTime = Date.now();
+    let status: 'success' | 'error' = 'success';
+    let result: unknown;
+    let errorMsg: string | undefined;
+
     try {
       // Validate API token
       const tokenValidation = validateToken(functionName, {
@@ -113,6 +119,8 @@ export function registerFunctionRoute(fastify: FastifyInstance, functionName: st
       });
 
       if (!tokenValidation.valid) {
+        status = 'error';
+        errorMsg = 'Unauthorized';
         return reply.code(401).send({
           success: false,
           error: 'Unauthorized',
@@ -124,14 +132,16 @@ export function registerFunctionRoute(fastify: FastifyInstance, functionName: st
       const validatedInputs = inputSchema.parse(request.body);
       
       // Exécuter la fonction
-      const result = await executeGeneratedFunction(functionName, validatedInputs);
+      result = await executeGeneratedFunction(functionName, validatedInputs);
       
       return {
         success: true,
         result,
       };
     } catch (error) {
+      status = 'error';
       if (error instanceof z.ZodError) {
+        errorMsg = 'Validation error';
         return reply.code(400).send({
           success: false,
           error: 'Validation error',
@@ -139,10 +149,24 @@ export function registerFunctionRoute(fastify: FastifyInstance, functionName: st
         });
       }
       
+      errorMsg = error instanceof Error ? error.message : 'Erreur inconnue';
       console.error(`Erreur dans la route /api/${functionName}:`, error);
       return reply.code(500).send({
         success: false,
-        error: error instanceof Error ? error.message : 'Erreur inconnue',
+        error: errorMsg,
+      });
+    } finally {
+      // Log execution after response
+      const duration = Date.now() - startTime;
+      import('./analytics-service').then(m => {
+        m.logExecution({
+          functionName,
+          duration,
+          status,
+          inputs: request.body as Record<string, unknown>,
+          output: status === 'success' ? result : undefined,
+          error: errorMsg,
+        }).catch(err => console.error('Erreur lors du log analytics:', err));
       });
     }
   };

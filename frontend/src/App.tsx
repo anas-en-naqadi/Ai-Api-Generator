@@ -3,6 +3,8 @@ import FunctionCreator from './components/FunctionCreator';
 import FunctionList from './components/FunctionList';
 import ApiTester from './components/ApiTester';
 import DocumentationPage from './components/DocumentationPage';
+import AnalyticsDashboard from './components/AnalyticsDashboard';
+import ExecutionLogs from './components/ExecutionLogs';
 import ToastContainer from './components/ToastContainer';
 import { useToast } from './hooks/useToast';
 import './App.css';
@@ -36,7 +38,7 @@ export interface GeneratedFunction {
 function App() {
   const [selectedFunction, setSelectedFunction] = useState<GeneratedFunction | null>(null);
   const [functions, setFunctions] = useState<GeneratedFunction[]>([]);
-  const [activeTab, setActiveTab] = useState<'create' | 'list' | 'test' | 'docs'>('create');
+  const [activeTab, setActiveTab] = useState<'create' | 'list' | 'test' | 'docs' | 'analytics' | 'logs'>('create');
   const [docsFunction, setDocsFunction] = useState<GeneratedFunction | null>(null);
   const { toasts, showSuccess, showError, removeToast } = useToast();
 
@@ -161,23 +163,45 @@ function App() {
           >
             Fonctions ({functions.length})
           </button>
+          
           {selectedFunction && (
-            <button
-              className={`nav-button ${activeTab === 'test' ? 'active' : ''}`}
-              onClick={() => setActiveTab('test')}
-              aria-label="Tester l'API"
-            >
-              Tester: {selectedFunction.name}
-            </button>
+            <>
+              <div className="nav-divider"></div>
+              <button
+                className={`nav-button ${activeTab === 'test' ? 'active' : ''}`}
+                onClick={() => setActiveTab('test')}
+                aria-label="Tester l'API"
+              >
+                Tester: {selectedFunction.name}
+              </button>
+              <button
+                className={`nav-button ${activeTab === 'analytics' ? 'active' : ''}`}
+                onClick={() => setActiveTab('analytics')}
+                aria-label="Analytics"
+              >
+                📊 Stats
+              </button>
+              <button
+                className={`nav-button ${activeTab === 'logs' ? 'active' : ''}`}
+                onClick={() => setActiveTab('logs')}
+                aria-label="Logs"
+              >
+                📜 Logs
+              </button>
+            </>
           )}
+
           {docsFunction && (
-            <button
-              className={`nav-button ${activeTab === 'docs' ? 'active' : ''}`}
-              onClick={() => setActiveTab('docs')}
-              aria-label="Documentation"
-            >
-              📚 Docs: {docsFunction.name}
-            </button>
+            <>
+              <div className="nav-divider"></div>
+              <button
+                className={`nav-button ${activeTab === 'docs' ? 'active' : ''}`}
+                onClick={() => setActiveTab('docs')}
+                aria-label="Documentation"
+              >
+                📚 Docs: {docsFunction.name}
+              </button>
+            </>
           )}
         </div>
       </nav>
@@ -204,6 +228,18 @@ function App() {
           )}
           {activeTab === 'test' && selectedFunction && (
             <ApiTester function={selectedFunction} />
+          )}
+          {activeTab === 'analytics' && selectedFunction && (
+            <AnalyticsDashboard 
+              functionName={selectedFunction.name} 
+              onBack={() => setActiveTab('list')}
+            />
+          )}
+          {activeTab === 'logs' && selectedFunction && (
+            <ExecutionLogs 
+              functionName={selectedFunction.name} 
+              onBack={() => setActiveTab('list')}
+            />
           )}
           {activeTab === 'docs' && docsFunction && (
             <DocumentationPage

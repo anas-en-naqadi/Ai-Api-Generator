@@ -19,17 +19,18 @@ export function executeInSandbox(
   try {
     // Nettoyer le code : enlever les exports et les annotations TypeScript
     let cleanedCode = functionCode.trim();
-    
+
     // Enlever les exports
+    cleanedCode = cleanedCode.replaceAll(/(\w+)\s*\?\s*:/g, '$1:');
     cleanedCode = cleanedCode.replaceAll(/^export\s+(function|const|let|var)\s+/gm, '$1 ');
     cleanedCode = cleanedCode.replaceAll(/^export\s*\{/gm, '{');
-    
+
     // Enlever les annotations de type TypeScript pour convertir en JavaScript pur
     // L'ordre est important : d'abord les types de retour, puis les paramètres
-    
+
     // 1. Enlever les types de retour : function name(): type { -> function name() {
     cleanedCode = cleanedCode.replaceAll(/\)\s*:\s*[a-zA-Z_$][a-zA-Z0-9_$<>[\],\s|&]*\s*\{/g, ') {');
-    
+
     // 2. Enlever les types de paramètres dans les fonctions : (param: type, param2: type) -> (param, param2)
     cleanedCode = cleanedCode.replaceAll(/function\s+\w+\s*\(([^)]+)\)/g, (match, params) => {
       const paramNames = params.split(',').map((p: string) => {
@@ -39,7 +40,7 @@ export function executeInSandbox(
       });
       return match.replace(`(${params})`, `(${paramNames.join(', ')})`);
     });
-    
+
     // 3. Enlever les types de paramètres dans les fonctions anonymes/arrow : (param: type) => -> (param) =>
     cleanedCode = cleanedCode.replaceAll(/\(([^)]+)\)\s*:/g, (match, params) => {
       const paramNames = params.split(',').map((p: string) => {
@@ -49,7 +50,7 @@ export function executeInSandbox(
       });
       return `(${paramNames.join(', ')})`;
     });
-    
+
     // 4. Enlever les annotations de type sur les variables : const x: type = -> const x =
     cleanedCode = cleanedCode.replaceAll(/(const|let|var)\s+(\w+)\s*:\s*[^=]+=/g, '$1 $2 =');
 
@@ -62,14 +63,14 @@ export function executeInSandbox(
         // Définir Infinity et NaN localement pour éviter les problèmes de proxy
         const Infinity = Number.POSITIVE_INFINITY;
         const NaN = Number.NaN;
-        
+
         ${cleanedCode}
-        
+
         // Vérifier que la fonction existe
         if (typeof ${functionName} !== 'function') {
           throw new Error('Fonction ${functionName} non trouvée dans le code généré');
         }
-        
+
         // Exécuter la fonction avec les arguments du sandbox
         return ${functionName}(${inputNames.map((name) => `args.${name}`).join(', ')});
       })()

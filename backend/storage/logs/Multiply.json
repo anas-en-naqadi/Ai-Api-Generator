@@ -1,0 +1,26 @@
+[
+  {
+    "id": "7c0aa78f-8641-440a-8cce-cac610682cab",
+    "timestamp": "2026-01-06T18:25:51.587Z",
+    "functionName": "Multiply",
+    "duration": 16,
+    "status": "success",
+    "inputs": {
+      "a": 10,
+      "b": 10
+    },
+    "output": 100
+  },
+  {
+    "id": "dfc2d0a4-423c-45aa-9a33-f738f8cd3f52",
+    "timestamp": "2026-01-06T18:24:50.469Z",
+    "functionName": "Multiply",
+    "duration": 63,
+    "status": "success",
+    "inputs": {
+      "a": 5,
+      "b": 7
+    },
+    "output": 35
+  }
+]

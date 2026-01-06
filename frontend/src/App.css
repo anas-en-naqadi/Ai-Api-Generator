@@ -67,6 +67,14 @@
   cursor: not-allowed;
 }
 
+.nav-divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--color-border);
+  margin: auto var(--spacing-sm);
+  align-self: center;
+}
+
 .app-main {
   flex: 1;
   padding: var(--spacing-2xl) 0;

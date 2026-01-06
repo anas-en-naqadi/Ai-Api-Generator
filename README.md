@@ -21,6 +21,8 @@
 - 🧪 **Built-in API Tester** - Test your APIs directly from the interface
 - ✏️ **Edit & Update** - Modify existing functions with automatic documentation regeneration
 - 📊 **Smart Examples** - AI-generated example payloads for testing
+- 📈 **Real-time Analytics** - Track usage, success rates, and average latency with beautiful graphs
+- 📜 **Execution Logs** - View detailed history of inputs and outputs for debugging
 
 ## 🎯 How It Works
 
@@ -222,6 +224,8 @@ This is a **proof of concept (POC)** project. While functional, it's intended fo
 
 ## 🗺️ Roadmap
 
+- [x] Usage Analytics & Dashboard
+- [x] Execution Logs
 - [ ] Support for multiple AI providers
 - [ ] API versioning
 - [ ] Rate limiting per function

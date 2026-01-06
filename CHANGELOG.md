@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change detection in edit modal (button disabled until changes)
 - Token included in all documentation examples
 - Automatic documentation regeneration on function updates
+- Usage Analytics Dashboard with Recharts graphs
+- Execution Logs history with input/output tracking
 
 ### Changed
 - Improved error handling and user feedback
